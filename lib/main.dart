@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intelligreen_mobile/screens/catalogo/catalogo_screen.dart';
-import 'package:intelligreen_mobile/screens/plantas/mis_plantas_screen.dart';
-import 'package:intelligreen_mobile/widgets/shared/intelligreen_bottom_navigation_bar.dart';
+import 'package:intelligreen_mobile/router/app_navigation.dart';
 
 void main() => runApp(const IntelligreenApp());
 
@@ -13,26 +11,13 @@ class IntelligreenApp extends StatefulWidget {
 }
 
 class _IntelligreenAppState extends State<IntelligreenApp> {
-  int currentIndex = 0;
-
-  final _screens = [
-    const MisPlantasScreen(),
-    const CatalogoScreen(),
-  ];
-
-  void onTap(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-
-    print(currentIndex);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Intelligreen',
       debugShowCheckedModeBanner: false,
+      routerConfig: AppNavigation.router,
+      /*
       home: Scaffold(
         body: SafeArea(child: _screens[currentIndex]),
         bottomNavigationBar: IntelligreenBottomNavigationBar(
@@ -40,6 +25,7 @@ class _IntelligreenAppState extends State<IntelligreenApp> {
           onTap: onTap,
         ),
       ),
+      */
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intelligreen_mobile/models/planta.dart';
 
 class CatalogoPlantaItem extends StatelessWidget {
@@ -24,24 +25,29 @@ class CatalogoPlantaItem extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: boxDecoration,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  _Imagen(planta.imgUrl),
-                  const SizedBox(width: 12),
-                  Expanded(
-                      child: _Textos(
-                    planta.nombreColoquial,
-                    planta.nombreCientifico,
-                  )),
-                  const SizedBox(width: 12),
-                  RatingAvatar(
-                    dificultad: planta.dificultad,
-                  ),
-                ],
+          child: GestureDetector(
+            onTap: () {
+              context.goNamed("detalles");
+            },
+            child: Container(
+              decoration: boxDecoration,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: [
+                    _Imagen(planta.imgUrl),
+                    const SizedBox(width: 12),
+                    Expanded(
+                        child: _Textos(
+                      planta.nombreColoquial,
+                      planta.nombreCientifico,
+                    )),
+                    const SizedBox(width: 12),
+                    RatingAvatar(
+                      dificultad: planta.dificultad,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

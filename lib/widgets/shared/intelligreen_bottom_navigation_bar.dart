@@ -21,15 +21,15 @@ class IntelligreenBottomNavigationBar extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: BottomCircleAvatar(
-                image: Image.asset("assets/imagen_plantas.png"),
-              ),
-              label: "Plantas",
-            ),
-            BottomNavigationBarItem(
-              icon: BottomCircleAvatar(
                 image: Image.asset("assets/imagen_catalogo.png"),
               ),
               label: "Catálogo",
+            ),
+            BottomNavigationBarItem(
+              icon: BottomCircleAvatar(
+                image: Image.asset("assets/imagen_plantas.png"),
+              ),
+              label: "Plantas",
             )
           ],
           onTap: onTap,
