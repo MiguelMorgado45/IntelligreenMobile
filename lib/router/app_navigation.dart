@@ -1,24 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intelligreen_mobile/models/dispositivo.dart';
+import 'package:intelligreen_mobile/models/planta.dart';
 import 'package:intelligreen_mobile/screens/catalogo/catalogo_screen.dart';
 import 'package:intelligreen_mobile/screens/catalogo/detalle_screen.dart';
+import 'package:intelligreen_mobile/screens/dispositivos/crear_dispositivos_bt_screen.dart';
+import 'package:intelligreen_mobile/screens/dispositivos/dispositivo_screen.dart';
 import 'package:intelligreen_mobile/screens/layout/main_layout.dart';
 import 'package:intelligreen_mobile/screens/plantas/mis_plantas_screen.dart';
+import 'package:intelligreen_mobile/screens/plantas/registrar_planta.dart';
 
 class AppNavigation {
   AppNavigation._();
 
   static String initR = '/catalogo';
 
-  /// Private Navigator Key
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _rootNavigatorCatalogo =
-      GlobalKey<NavigatorState>(debugLabel: "shellCatalogo");
-
   /// Go Router Configuration
   static final GoRouter router = GoRouter(
     initialLocation: initR,
-    navigatorKey: _rootNavigatorKey,
     routes: [
       // Catálogo
       StatefulShellRoute.indexedStack(
@@ -27,7 +25,6 @@ class AppNavigation {
           },
           branches: [
             StatefulShellBranch(
-              navigatorKey: _rootNavigatorCatalogo,
               routes: [
                 GoRoute(
                     path: '/catalogo',
@@ -37,10 +34,37 @@ class AppNavigation {
                       GoRoute(
                           path: 'detalles',
                           name: 'detalles',
-                          builder: (context, state) => const DetalleScreen())
+                          builder: (context, state) => DetalleScreen(
+                                planta: (state.extra as Planta),
+                              )),
+                      GoRoute(
+                        path: "crear",
+                        name: "crear",
+                        builder: (context, state) {
+                          return RegistrarPlanta(planta: state.extra as Planta);
+                        },
+                      )
                     ]),
               ],
             ),
+            StatefulShellBranch(routes: [
+              GoRoute(
+                  path: "/dispositivos",
+                  name: "dispositivos",
+                  builder: (context, state) {
+                    return const DispositivosScreen();
+                  },
+                  routes: [
+                    GoRoute(
+                        path: "crearDispositivos",
+                        name: "crearDispositivos",
+                        builder: (context, state) {
+                          return CrearDispositivosBTScreen(
+                            dispositivo: (state.extra as Dispositivo),
+                          );
+                        }),
+                  ]),
+            ]),
             StatefulShellBranch(routes: [
               GoRoute(
                   path: "/plantas",
@@ -48,7 +72,7 @@ class AppNavigation {
                   builder: (context, state) {
                     return const MisPlantasScreen();
                   })
-            ])
+            ]),
           ])
     ],
   );

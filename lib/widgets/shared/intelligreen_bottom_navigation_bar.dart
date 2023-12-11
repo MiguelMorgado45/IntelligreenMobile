@@ -25,6 +25,13 @@ class IntelligreenBottomNavigationBar extends StatelessWidget {
               ),
               label: "Catálogo",
             ),
+            const BottomNavigationBarItem(
+                icon: BottomCircleAvatar(
+                    image: Icon(
+                  Icons.bluetooth,
+                  color: Colors.white,
+                )),
+                label: "Dispositivos"),
             BottomNavigationBarItem(
               icon: BottomCircleAvatar(
                 image: Image.asset("assets/imagen_plantas.png"),

@@ -27,7 +27,7 @@ class CatalogoPlantaItem extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () {
-              context.goNamed("detalles");
+              context.goNamed("detalles", extra: planta);
             },
             child: Container(
               decoration: boxDecoration,
