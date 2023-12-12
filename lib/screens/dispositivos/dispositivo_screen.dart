@@ -31,9 +31,8 @@ class _DispositivosScreenState extends State<DispositivosScreen> {
 
     var client = http.Client();
     try {
-      var response = await client.get(Uri.https(
-          "7d3c-2806-2a0-1432-3e82-b981-a275-87e5-f6fd.ngrok-free.app",
-          "/Dispositivo"));
+      var response = await client
+          .get(Uri.https("intelligreenapi.azurewebsites.net", "/Dispositivo"));
 
       final data = jsonDecode(response.body);
 

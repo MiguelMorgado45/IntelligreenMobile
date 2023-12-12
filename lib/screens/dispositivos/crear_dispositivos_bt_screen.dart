@@ -85,9 +85,7 @@ class _CrearDispositivosBTScreenState extends State<CrearDispositivosBTScreen> {
       String body = json.encode(datos);
 
       await client.post(
-          Uri.https(
-              "7d3c-2806-2a0-1432-3e82-b981-a275-87e5-f6fd.ngrok-free.app",
-              "/Dispositivo"),
+          Uri.https("intelligreenapi.azurewebsites.net", "/Dispositivo"),
           headers: {"Content-Type": "application/json"},
           body: body);
 

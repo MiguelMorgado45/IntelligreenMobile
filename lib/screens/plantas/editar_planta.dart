@@ -3,28 +3,36 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intelligreen_mobile/models/dispositivo.dart';
-import 'package:intelligreen_mobile/models/planta.dart';
-import 'package:http/http.dart' as http;
 import 'package:intelligreen_mobile/models/planta_usuario.dart';
 import 'package:logo_n_spinner/logo_n_spinner.dart';
+import 'package:http/http.dart' as http;
 
-class RegistrarPlanta extends StatefulWidget {
-  const RegistrarPlanta({super.key, required this.planta});
+class EditarPlantaScreen extends StatefulWidget {
+  const EditarPlantaScreen({super.key, required this.planta});
 
-  final Planta planta;
+  final PlantaUsuario planta;
 
   @override
-  State<RegistrarPlanta> createState() => _RegistrarPlantaState();
+  State<EditarPlantaScreen> createState() => _EditarPlantaScreenState();
 }
 
-class _RegistrarPlantaState extends State<RegistrarPlanta> {
+class _EditarPlantaScreenState extends State<EditarPlantaScreen> {
   String? dropdownValue;
   final nombreController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    nombreController.text = widget.planta.apodo!;
+    dropdownValue = widget.planta.dispositivoId!;
+  }
 
   Future<void> crearPlanta(PlantaUsuario plantaUsuario) async {
     var client = http.Client();
     try {
       Map datos = {
+        'plantaUsuarioId': widget.planta.plantaUsuarioId,
         'dispositivoId': plantaUsuario.dispositivoId,
         'plantaId': plantaUsuario.plantaId,
         'apodo': plantaUsuario.apodo
@@ -75,7 +83,7 @@ class _RegistrarPlantaState extends State<RegistrarPlanta> {
             return Column(
               children: [
                 const Text(
-                  "Registra tu planta",
+                  "Editar tu planta",
                   style: TextStyle(fontSize: 30),
                 ),
                 const SizedBox(
@@ -83,7 +91,7 @@ class _RegistrarPlantaState extends State<RegistrarPlanta> {
                 ),
                 CircleAvatar(
                   radius: 80,
-                  child: Image.network(widget.planta.imgUrl),
+                  child: Image.network(widget.planta.planta!.imgUrl),
                 ),
                 const SizedBox(
                   height: 30,

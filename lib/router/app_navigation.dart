@@ -1,11 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:intelligreen_mobile/models/dispositivo.dart';
 import 'package:intelligreen_mobile/models/planta.dart';
+import 'package:intelligreen_mobile/models/planta_usuario.dart';
 import 'package:intelligreen_mobile/screens/catalogo/catalogo_screen.dart';
 import 'package:intelligreen_mobile/screens/catalogo/detalle_screen.dart';
 import 'package:intelligreen_mobile/screens/dispositivos/crear_dispositivos_bt_screen.dart';
 import 'package:intelligreen_mobile/screens/dispositivos/dispositivo_screen.dart';
 import 'package:intelligreen_mobile/screens/layout/main_layout.dart';
+import 'package:intelligreen_mobile/screens/plantas/editar_planta.dart';
+import 'package:intelligreen_mobile/screens/plantas/estadisticas_screen.dart';
 import 'package:intelligreen_mobile/screens/plantas/mis_plantas_screen.dart';
 import 'package:intelligreen_mobile/screens/plantas/registrar_planta.dart';
 
@@ -43,6 +46,14 @@ class AppNavigation {
                         builder: (context, state) {
                           return RegistrarPlanta(planta: state.extra as Planta);
                         },
+                      ),
+                      GoRoute(
+                        path: "editar",
+                        name: "editar",
+                        builder: (context, state) {
+                          return EditarPlantaScreen(
+                              planta: state.extra as PlantaUsuario);
+                        },
                       )
                     ]),
               ],
@@ -71,7 +82,17 @@ class AppNavigation {
                   name: "plantas",
                   builder: (context, state) {
                     return const MisPlantasScreen();
-                  })
+                  },
+                  routes: [
+                    GoRoute(
+                        path: "estadistica",
+                        name: "estadistica",
+                        builder: (context, state) {
+                          return EstadisticasScreen(
+                            plantaUsuario: (state.extra as PlantaUsuario),
+                          );
+                        }),
+                  ]),
             ]),
           ])
     ],
