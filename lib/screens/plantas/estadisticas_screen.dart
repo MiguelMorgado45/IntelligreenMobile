@@ -201,7 +201,7 @@ class _EstadisticasScreenState extends State<EstadisticasScreen> {
               ),
             ),
             Text(
-              "${estadistica.temperatura.toString()} °C",
+              "${double.parse(estadistica.temperatura).toStringAsFixed(2)} °C",
               style: TextStyle(fontSize: 20, color: getColor(3)),
             ),
           ],
