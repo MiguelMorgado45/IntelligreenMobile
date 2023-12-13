@@ -2,10 +2,10 @@
 
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
+import 'package:uuid/uuid.dart';
 
 class MQTTManager {
   MqttServerClient? _client;
-  final String _identifier;
   final String _host;
   final String _topic;
   final Function(String) _setReceivedEstadistica;
@@ -13,15 +13,15 @@ class MQTTManager {
   MQTTManager(
       {required String host,
       required String topic,
-      required String identifier,
       required Function(String) setReceivedEstadistica})
-      : _identifier = identifier,
-        _host = host,
+      : _host = host,
         _topic = topic,
         _setReceivedEstadistica = setReceivedEstadistica;
 
   void initializeMQTTClient() {
-    _client = MqttServerClient(_host, _identifier);
+    var uuid = Uuid();
+    var identificador = uuid.v4();
+    _client = MqttServerClient(_host, identificador);
     _client!.port = 8883;
     _client!.secure = true;
     _client!.keepAlivePeriod = 20;
@@ -33,7 +33,7 @@ class MQTTManager {
     _client!.onSubscribed = onSubscribed;
 
     final MqttConnectMessage connMess = MqttConnectMessage()
-        .withClientIdentifier(_identifier)
+        .withClientIdentifier(identificador)
         .authenticateAs("user", "user")
         .withWillQos(MqttQos.atLeastOnce);
     _client!.connectionMessage = connMess;

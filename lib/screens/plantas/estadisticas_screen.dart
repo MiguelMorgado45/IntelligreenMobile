@@ -263,7 +263,6 @@ class _EstadisticasScreenState extends State<EstadisticasScreen> {
     manager = MQTTManager(
         host: "x2824759.ala.us-east-1.emqxsl.com",
         topic: "esp32/${widget.plantaUsuario.dispositivo!.circuitoId}",
-        identifier: osPrefix,
         setReceivedEstadistica: setReceivedEstadistica);
     manager.initializeMQTTClient();
     manager.connect();
